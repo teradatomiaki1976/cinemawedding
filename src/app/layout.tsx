@@ -1,34 +1,47 @@
 import type { Metadata } from "next";
-import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
+import {
+  Noto_Sans_JP,
+  Noto_Serif_JP,
+  Cormorant_Garamond,
+} from "next/font/google"; // インポート追加
 import "./globals.css";
 
-const serif = Noto_Serif_JP({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-serif",
-});
-
-const sans = Noto_Sans_JP({
-  weight: ["400", "500", "700"],
+// 本文用（日本語）
+const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
+// 見出し用（日本語）
+const notoSerifJP = Noto_Serif_JP({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
+
+// タイトル・アクセント用（欧文専用：Cormorant Garamond）
+const cormorantGaramond = Cormorant_Garamond({
+  weight: ["400", "600", "700"],
+  subsets: ["latin"],
+  style: ["normal", "italic"], // イタリック体（斜体）も使えるようにするとより映画的
+  variable: "--font-display", // 新しく display という名前で定義
+});
+
 export const metadata: Metadata = {
-  title: "シネマウェディング | ふたりの人生を、一本の名作に。",
-  description:
-    "特別な演技はいりません。プロの伴走で、ありのままのおふたりを美しく残すウェディングムービー。",
+  title: "シネマウェディング",
+  description: "映画のような、一生モノのウェディング体験を",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ja">
+      {/* 3つの変数をすべて適用 */}
       <body
-        className={`${sans.variable} ${serif.variable} font-sans text-cinema-black bg-white antialiased`}
+        className={`${notoSansJP.variable} ${notoSerifJP.variable} ${cormorantGaramond.variable} bg-gray font-sans text-black antialiased`}
       >
         {children}
       </body>

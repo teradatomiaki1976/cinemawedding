@@ -26,12 +26,12 @@ export default function Hero() {
 
       {/* コンテンツエリア */}
       <div className="animate-fade-in-up relative z-30 flex flex-col items-center justify-center px-4">
-        <h1 className="mb-6 text-center font-serif text-4xl leading-tight font-bold tracking-widest drop-shadow-lg md:text-6xl">
-          THE CINEMATIC WEDDING
-        </h1>
-        <p className="max-w-xl text-center font-sans text-base tracking-wide opacity-90 drop-shadow-md md:text-lg">
+        <p className="mb-2 max-w-xl text-center font-serif text-base tracking-wide opacity-90 drop-shadow-md md:text-xl">
           〜 人生最良の日を、一本の映画に 〜
         </p>
+        <h1 className="font-display text-center text-4xl leading-tight font-bold tracking-wider drop-shadow-lg md:text-6xl">
+          THE CINEMATIC WEDDING
+        </h1>
       </div>
 
       {/* スクロールインジケーター（下の黒帯の中に綺麗に収まるように z-index を調整） */}
