@@ -9,13 +9,12 @@ const storyData = {
     "「カメラを向けられると緊張してしまう。そんな私たちが、心から楽しめた一日でした」",
   coupleName: "C & C 様",
   imageSrc: "/images/our-story.jpg",
-  imageAlt: "京都で自然に笑い合うダンサーカップル",
+  imageAlt: "自然に笑い合うダンサーカップル",
   paragraphs: [
     "「普段はステージで踊っていますが、いざ自分たちのウェディングムービーとなると、どう振る舞っていいか分からず、最初はとても不安でした。作られた笑顔を残すのは絶対に嫌だったんです。」",
     "「でも、撮影チームの皆さんが作ってくれた空気感のおかげで、いつの間にかカメラの存在を忘れていました。無理にポーズを要求されることもなく、ただふたりで過ごす時間を美しく切り取ってくれたような感覚です。」",
-    "「完成した映像を見たとき、そこに映っていたのは『飾らない、いつもの私たち』でした。恥ずかしがり屋の彼も、『これなら何年経っても見返したいね』と言ってくれて。勇気を出してお願いして本当に良かったです。」",
+    "「恥ずかしがり屋の彼も、『これなら何年経っても見返したいね』と言ってくれて。勇気を出してお願いして本当に良かったです。」",
   ],
-  accentText: "A movie that captures the true essence of us.",
 };
 
 export default function OurStory() {
@@ -63,13 +62,6 @@ export default function OurStory() {
                 {storyData.paragraphs.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
-              </div>
-
-              {/* アクセントカラーを使った引用符風のあしらい */}
-              <div className="mt-12 border-l-2 border-[#B89B72] py-2 pl-6">
-                <p className="font-serif text-sm tracking-wide text-gray-500 italic">
-                  "{storyData.accentText}"
-                </p>
               </div>
             </div>
           </div>
