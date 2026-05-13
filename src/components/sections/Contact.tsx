@@ -1,5 +1,6 @@
 // src/components/sections/Contact.tsx
 "use client";
+import FadeIn from "@/components/ui/FadeIn";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -32,52 +33,54 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-full py-24 px-6 md:px-12 bg-white flex flex-col items-center"
+      className="flex w-full flex-col items-center bg-white px-6 py-24 md:px-12"
     >
-      <div className="max-w-5xl w-full">
+      <div className="w-full max-w-5xl">
         {/* セクションタイトル */}
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-[#1A1A1B]">
-            Contact
-          </h2>
-          <p className="text-gray-600 leading-relaxed">
-            おふたりだけの映画づくり、まずはここから。
-            <br />
-            「こんなこと聞いてもいいのかな？」という些細な疑問でも、お気軽にご相談ください。
-          </p>
+        <div className="mb-16 text-center">
+          <FadeIn>
+            <h2 className="mb-4 font-serif text-3xl font-bold text-[#1A1A1B] md:text-4xl">
+              Contact
+            </h2>
+            <p className="leading-relaxed text-gray-600">
+              おふたりだけの映画づくり、まずはここから。
+              <br />
+              「こんなこと聞いてもいいのかな？」という些細な疑問でも、お気軽にご相談ください。
+            </p>
+          </FadeIn>
         </div>
 
         {/* コンタクトエリア (LINE / Form 分割) */}
-        <div className="flex flex-col md:flex-row gap-12 md:gap-8 lg:gap-16">
+        <div className="flex flex-col gap-12 md:flex-row md:gap-8 lg:gap-16">
           {/* 左側: LINE導線 */}
-          <div className="w-full md:w-5/12 flex flex-col items-center text-center bg-[#F9F9F9] p-8 rounded-xl shrink-0 h-fit">
-            <h3 className="font-bold text-lg text-[#1A1A1B] mb-2">
+          <div className="flex h-fit w-full shrink-0 flex-col items-center rounded-xl bg-[#F9F9F9] p-8 text-center md:w-5/12">
+            <h3 className="mb-2 text-lg font-bold text-[#1A1A1B]">
               LINEで気軽に相談
             </h3>
-            <p className="text-sm text-gray-600 mb-6">
+            <p className="mb-6 text-sm text-gray-600">
               お急ぎの方や、まずはチャットで
               <br className="hidden md:block" />
               質問したい方はこちらから。
             </p>
             {/* QRコードのプレースホルダー (v4ルールの aspect-square を使用) */}
-            <div className="w-40 aspect-square bg-white border border-gray-200 shadow-sm flex items-center justify-center mb-6">
-              <span className="text-gray-400 text-sm">QR Code</span>
+            <div className="mb-6 flex aspect-square w-40 items-center justify-center border border-gray-200 bg-white shadow-sm">
+              <span className="text-sm text-gray-400">QR Code</span>
             </div>
             <a
               href="#"
-              className="w-full py-4 bg-[#06C755] hover:bg-[#05b34c] text-white font-bold rounded-md transition-colors duration-300"
+              className="w-full rounded-md bg-[#06C755] py-4 font-bold text-white transition-colors duration-300 hover:bg-[#05b34c]"
             >
               友だち追加して相談する
             </a>
           </div>
 
           {/* 中央: 区切り線 (PCのみ表示) */}
-          <div className="hidden md:block w-1px bg-gray-200 shrink-0"></div>
+          <div className="w-1px hidden shrink-0 bg-gray-200 md:block"></div>
 
           {/* 右側: Webフォーム (React Hook Form) */}
-          <div className="w-full md:w-7/12 grow">
+          <div className="w-full grow md:w-7/12">
             <div className="mb-6">
-              <h3 className="font-bold text-lg text-[#1A1A1B] mb-2">
+              <h3 className="mb-2 text-lg font-bold text-[#1A1A1B]">
                 フォームから詳細を相談
               </h3>
               <p className="text-sm text-gray-600">
@@ -93,7 +96,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-[#1A1A1B] mb-1"
+                  className="mb-1 block text-sm font-medium text-[#1A1A1B]"
                 >
                   お名前 <span className="text-red-500">*</span>
                 </label>
@@ -102,10 +105,10 @@ export default function Contact() {
                   type="text"
                   placeholder="映画 太郎"
                   {...register("name", { required: "お名前は必須です" })}
-                  className={`w-full px-4 py-3 bg-[#F9F9F9] border ${errors.name ? "border-red-500" : "border-gray-200"} rounded-md focus:outline-none focus:border-[#B89B72] transition-colors`}
+                  className={`w-full border bg-[#F9F9F9] px-4 py-3 ${errors.name ? "border-red-500" : "border-gray-200"} rounded-md transition-colors focus:border-[#B89B72] focus:outline-none`}
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="mt-1 text-xs text-red-500">
                     {errors.name.message}
                   </p>
                 )}
@@ -115,7 +118,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-[#1A1A1B] mb-1"
+                  className="mb-1 block text-sm font-medium text-[#1A1A1B]"
                 >
                   メールアドレス <span className="text-red-500">*</span>
                 </label>
@@ -130,10 +133,10 @@ export default function Contact() {
                       message: "有効なメールアドレスを入力してください",
                     },
                   })}
-                  className={`w-full px-4 py-3 bg-[#F9F9F9] border ${errors.email ? "border-red-500" : "border-gray-200"} rounded-md focus:outline-none focus:border-[#B89B72] transition-colors`}
+                  className={`w-full border bg-[#F9F9F9] px-4 py-3 ${errors.email ? "border-red-500" : "border-gray-200"} rounded-md transition-colors focus:border-[#B89B72] focus:outline-none`}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="mt-1 text-xs text-red-500">
                     {errors.email.message}
                   </p>
                 )}
@@ -143,7 +146,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-[#1A1A1B] mb-1"
+                  className="mb-1 block text-sm font-medium text-[#1A1A1B]"
                 >
                   電話番号
                 </label>
@@ -152,7 +155,7 @@ export default function Contact() {
                   type="tel"
                   placeholder="090-1234-5678"
                   {...register("phone")}
-                  className="w-full px-4 py-3 bg-[#F9F9F9] border border-gray-200 rounded-md focus:outline-none focus:border-[#B89B72] transition-colors"
+                  className="w-full rounded-md border border-gray-200 bg-[#F9F9F9] px-4 py-3 transition-colors focus:border-[#B89B72] focus:outline-none"
                 />
               </div>
 
@@ -160,7 +163,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-[#1A1A1B] mb-1"
+                  className="mb-1 block text-sm font-medium text-[#1A1A1B]"
                 >
                   ご相談内容 <span className="text-red-500">*</span>
                 </label>
@@ -168,11 +171,13 @@ export default function Contact() {
                   id="message"
                   rows={5}
                   placeholder="希望の撮影時期や、映像に残したい雰囲気など、自由にご記入ください。"
-                  {...register("message", { required: "ご相談内容は必須です" })}
-                  className={`w-full px-4 py-3 bg-[#F9F9F9] border ${errors.message ? "border-red-500" : "border-gray-200"} rounded-md focus:outline-none focus:border-[#B89B72] transition-colors resize-none`}
+                  {...register("message", {
+                    required: "ご相談内容は必須です",
+                  })}
+                  className={`w-full border bg-[#F9F9F9] px-4 py-3 ${errors.message ? "border-red-500" : "border-gray-200"} resize-none rounded-md transition-colors focus:border-[#B89B72] focus:outline-none`}
                 />
                 {errors.message && (
-                  <p className="text-red-500 text-xs mt-1">
+                  <p className="mt-1 text-xs text-red-500">
                     {errors.message.message}
                   </p>
                 )}
@@ -182,11 +187,11 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-4 w-full py-4 bg-[#1A1A1B] hover:bg-black text-white font-bold rounded-md transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-md bg-[#1A1A1B] py-4 font-bold text-white transition-colors duration-300 hover:bg-black disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? (
                   <>
-                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin shrink-0"></span>
+                    <span className="h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white"></span>
                     送信中...
                   </>
                 ) : (

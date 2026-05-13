@@ -1,4 +1,5 @@
 // src/components/sections/Promise.tsx
+import FadeIn from "@/components/ui/FadeIn";
 import React from "react";
 
 export default function PromiseSection() {
@@ -24,39 +25,43 @@ export default function PromiseSection() {
   ];
 
   return (
-    <section className="w-full py-24 px-6 md:px-12 bg-gray flex flex-col items-center">
-      <div className="max-w-5xl w-full">
+    <section className="bg-gray flex w-full flex-col items-center px-6 py-24 md:px-12">
+      <div className="w-full max-w-5xl">
         {/* セクションタイトル */}
-        <div className="text-center mb-16">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-black tracking-wide">
-            Our Promise
-          </h2>
-          <p className="text-sm tracking-widest text-black/70">
-            シネマウェディングが約束する3つのこと
-          </p>
+        <div className="mb-16 text-center">
+          <FadeIn>
+            <h2 className="mb-4 font-serif text-3xl font-bold tracking-wide text-black md:text-4xl">
+              Our Promise
+            </h2>
+            <p className="text-sm tracking-widest text-black/70">
+              シネマウェディングが約束する3つのこと
+            </p>
+          </FadeIn>
         </div>
 
         {/* 3つの約束 カラムエリア */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
           {promises.map((promise, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center group"
+              className="group flex flex-col items-center text-center"
             >
-              {/* ナンバリング (アクセントカラー) */}
-              <span className="font-serif text-5xl md:text-6xl italic text-accent mb-6 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                {promise.number}
-              </span>
+              <FadeIn delay={0.2}>
+                {/* ナンバリング (アクセントカラー) */}
+                <span className="text-accent mb-6 font-serif text-5xl italic opacity-80 transition-opacity duration-300 group-hover:opacity-100 md:text-6xl">
+                  {promise.number}
+                </span>
 
-              {/* タイトル */}
-              <h3 className="font-serif text-xl font-bold mb-4 text-black">
-                {promise.title}
-              </h3>
+                {/* タイトル */}
+                <h3 className="mb-4 font-serif text-xl font-bold text-black">
+                  {promise.title}
+                </h3>
 
-              {/* 本文 */}
-              <p className="text-sm leading-relaxed text-black/80 text-justify md:text-left px-2">
-                {promise.description}
-              </p>
+                {/* 本文 */}
+                <p className="px-2 text-justify text-sm leading-relaxed text-black/80 md:text-left">
+                  {promise.description}
+                </p>
+              </FadeIn>
             </div>
           ))}
         </div>

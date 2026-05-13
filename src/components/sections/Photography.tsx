@@ -1,57 +1,69 @@
 // src/components/sections/Photography.tsx
 import React from "react";
+import Image from "next/image";
+import FadeIn from "@/components/ui/FadeIn";
 
 export default function Photography() {
-  return (
-    <section className="w-full py-24 px-6 md:px-12 bg-[#1A1A1B] text-white flex flex-col items-center border-t border-white/10">
-      <div className="max-w-5xl w-full flex flex-col md:flex-row items-center gap-12 md:gap-20">
-        {/* 画像エリア */}
-        <div className="w-full md:w-1/2 relative">
-          <div className="aspect-[4/3] w-full bg-stone-800 rounded-sm overflow-hidden relative group">
-            {/* ホバー時の明るさ調整 */}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500 z-10 pointer-events-none" />
+  // ★ ここを実際の画像パス（public/images/...）に書き換えるだけでOK！
+  const photographyImage = "/images/1500x1000_still.jpg";
 
-            {/* プレースホルダー画像 */}
-            <div className="w-full h-full flex items-center justify-center text-white/40 text-sm transition-transform duration-700 group-hover:scale-105">
-              [ ふとした瞬間の自然なスチル写真 ]
+  return (
+    <section className="flex w-full flex-col items-center border-t border-white/10 bg-[#1A1A1B] px-6 py-24 text-white md:px-12">
+      <FadeIn>
+        <div className="flex w-full max-w-5xl flex-col items-center gap-12 md:flex-row md:gap-20">
+          {/* 画像エリア */}
+          <div className="relative w-full md:w-1/2">
+            {/* 装飾用の背面フレーム（シネマティックな金色の枠） */}
+            <div className="pointer-events-none absolute -right-6 -bottom-6 z-0 h-32 w-32 border-r-2 border-b-2 border-[#B89B72]/40" />
+            <div className="pointer-events-none absolute -top-6 -left-6 z-0 h-32 w-32 border-t-2 border-l-2 border-[#B89B72]/40" />
+
+            {/* 画像本体のコンテナ */}
+            <div className="group relative aspect-4/3 w-full overflow-hidden rounded-sm bg-stone-800 shadow-2xl">
+              {/* 実際の画像コンポーネント */}
+              <Image
+                src={photographyImage}
+                alt="自然な表情を切り取ったスチル写真"
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+
+              {/* シネマティックな質感：ホバー時に少しだけ明るさを戻すオーバーレイ */}
+              <div className="pointer-events-none absolute inset-0 z-10 bg-black/15 transition-colors duration-500 group-hover:bg-black/0" />
             </div>
           </div>
 
-          {/* シネマティックな装飾フレーム */}
-          <div className="absolute -bottom-6 -right-6 w-32 h-32 border-b-2 border-r-2 border-[#B89B72]/50 z-0 pointer-events-none" />
-          <div className="absolute -top-6 -left-6 w-32 h-32 border-t-2 border-l-2 border-[#B89B72]/50 z-0 pointer-events-none" />
-        </div>
+          {/* テキストエリア */}
+          <div className="flex w-full flex-col justify-center md:w-1/2">
+            <h2 className="mb-4 font-serif text-3xl font-bold text-[#B89B72] md:text-4xl">
+              Still Photography
+            </h2>
+            <p className="mb-8 font-serif text-lg tracking-widest opacity-90 md:text-xl">
+              映像のとなりで、そっと切り取る一枚。
+            </p>
 
-        {/* テキストエリア */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-[#B89B72]">
-            Still Photography
-          </h2>
-          <p className="text-lg md:text-xl mb-8 tracking-widest font-serif opacity-90">
-            映像のとなりで、そっと切り取る一枚。
-          </p>
+            <div className="mb-10 space-y-6 font-sans text-sm leading-loose opacity-80 md:text-base">
+              <p className="leading-relaxed">
+                「写真のためにポーズをとるのは、なんだか気恥ずかしい」
+                <br />
+                そんなおふたりにこそ、私たちのスチル撮影をおすすめします。
+              </p>
+              <p className="leading-relaxed">
+                ムービーのカメラが回っている隣で、フォトグラファーが静かにシャッターを切ります。だからこそ残せるのは、カメラを意識しない、いつもの自然な表情。
+              </p>
+              <p className="leading-relaxed">
+                映像と同じ世界観、同じ温度感で。
+                <br />
+                飾らないおふたりの姿を、映画のワンシーンのような一枚に仕立てます。
+              </p>
+            </div>
 
-          <div className="space-y-6 text-sm md:text-base leading-loose opacity-80 mb-10 font-sans">
-            <p>
-              「写真のためにポーズをとるのは、なんだか気恥ずかしい」
-              <br />
-              そんなおふたりにこそ、私たちのスチル撮影をおすすめします。
-            </p>
-            <p>
-              ムービーのカメラが回っている隣で、フォトグラファーが静かにシャッターを切ります。だからこそ残せるのは、カメラを意識しない、いつもの自然な表情。
-            </p>
-            <p>
-              映像と同じ世界観、同じ温度感で。
-              <br />
-              飾らないおふたりの姿を、映画のワンシーンのような一枚に仕立てます。
-            </p>
+            <button className="w-fit border border-white/30 px-10 py-4 text-xs tracking-[0.2em] text-white transition-all duration-300 hover:border-[#B89B72] hover:bg-[#B89B72] hover:text-[#1A1A1B]">
+              PLAN VIEW
+            </button>
           </div>
-
-          <button className="w-fit px-8 py-4 border border-white/30 text-white text-sm tracking-widest hover:border-[#B89B72] hover:bg-[#B89B72] hover:text-[#1A1A1B] transition-all duration-300">
-            スチル撮影プランを見る
-          </button>
         </div>
-      </div>
+      </FadeIn>
     </section>
   );
 }

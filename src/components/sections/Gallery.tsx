@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import FadeIn from "@/components/ui/FadeIn";
 
 // ギャラリーアイテムの型定義
 type GalleryItem = {
@@ -10,7 +11,7 @@ type GalleryItem = {
   type: "image" | "video";
   alt: string;
   src: string; // 実際の画像/動画のパス
-  height: string; // マソンリーレイアウト用の高さ
+  aspect: string; // ★ height の代わりにアスペクト比を持たせる
 };
 
 // ギャラリーのデータ（実案件では public/images/ や public/videos/ のパスに）
@@ -18,44 +19,44 @@ const galleryItems: GalleryItem[] = [
   {
     id: 1,
     type: "image",
-    alt: "笑顔で見つめ合うふたり",
+    alt: "",
     src: "/images/1500x1000_1.jpg",
-    height: "h-64",
+    aspect: "aspect-[3/2]",
   },
   {
     id: 2,
-    type: "video",
-    alt: "歩きながら話すシーン",
-    src: "/videos/gallery01.mp4",
-    height: "h-96",
+    type: "image",
+    alt: "",
+    src: "/images/1000x1500_1.jpg",
+    aspect: "aspect-[2/3]", // ★ 縦長に指定
   },
   {
     id: 3,
     type: "image",
-    alt: "風になびくドレス",
-    src: "/images/1000x1500_1.jpg",
-    height: "h-80",
+    alt: "",
+    src: "/images/1000x1500_2.jpg",
+    aspect: "aspect-[2/3]",
   },
   {
     id: 4,
-    type: "image",
-    alt: "何気ない会話の瞬間",
-    src: "/images/1500x1000_2.jpg",
-    height: "h-72",
+    type: "video",
+    alt: "",
+    src: "/videos/gallery01.mp4",
+    aspect: "aspect-video", // 16:9 の枠になる
   },
   {
     id: 5,
     type: "video",
-    alt: "夕暮れのシルエット",
+    alt: "",
     src: "/videos/gallery02.mp4",
-    height: "h-80",
+    aspect: "aspect-video", // 16:9 の枠になる
   },
   {
     id: 6,
     type: "image",
-    alt: "手を繋ぐクローズアップ",
-    src: "/images/1000x1500_2.jpg",
-    height: "h-96",
+    alt: "",
+    src: "/images/1500x1000_2.jpg",
+    aspect: "aspect-[3/2]", // ★ 縦長に指定
   },
 ];
 
@@ -71,12 +72,14 @@ export default function Gallery() {
       <div className="w-full max-w-6xl">
         {/* Header */}
         <div className="mb-16 text-center">
-          <h2 className="mb-4 font-serif text-3xl font-bold text-[#B89B72] md:text-4xl">
-            Cinematic Moments
-          </h2>
-          <p className="text-sm tracking-widest opacity-80 md:text-base">
-            飾らない瞬間が、名作になる。
-          </p>
+          <FadeIn>
+            <h2 className="mb-4 font-serif text-3xl font-bold text-[#B89B72] md:text-4xl">
+              Cinematic Moments
+            </h2>
+            <p className="text-sm tracking-widest opacity-80 md:text-base">
+              飾らない瞬間が、名作になる。
+            </p>
+          </FadeIn>
         </div>
 
         {/* Masonry Gallery */}
@@ -88,32 +91,30 @@ export default function Gallery() {
               onClick={() => setSelectedItem(item)} // クリックでStateにセット
             >
               {/* サムネイル画像 */}
-              <div
-                className={`relative w-full ${item.height} bg-stone-800 transition-transform duration-700 group-hover:scale-105`}
-              >
-                {item.type === "image" ? (
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-sm text-white/30">
-                    Video Thumbnail
-                  </div>
-                )}
-
-                {/* 動画用の再生アイコン */}
-                {item.type === "video" && (
-                  <div className="absolute inset-0 z-10 flex items-center justify-center">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md transition-transform duration-300 group-hover:scale-110">
-                      <div className="border-t-8px border-l-14px border-b-8px ml-1 h-0 w-0 border-t-transparent border-b-transparent border-l-white"></div>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <FadeIn delay={0.2}>
+                <div
+                  className={`relative w-full ${item.aspect} bg-stone-800 transition-transform duration-700 group-hover:scale-105`}
+                >
+                  {item.type === "image" ? (
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <video
+                      src={item.src}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  )}
+                </div>
+              </FadeIn>
 
               {/* ホバー時のオーバーレイ */}
               <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/20"></div>

@@ -1,5 +1,6 @@
 // src/components/sections/Flow.tsx
 import React from "react";
+import FadeIn from "@/components/ui/FadeIn";
 
 const flowSteps = [
   {
@@ -36,45 +37,49 @@ const flowSteps = [
 
 export default function Flow() {
   return (
-    <section className="w-full py-24 px-6 md:px-12 bg-[#F9F9F9] flex flex-col items-center">
-      <div className="text-center mb-16">
-        <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#1A1A1B] mb-4">
-          Flow
-        </h2>
-        <p className="text-sm md:text-base text-gray-600">
-          無料相談からご納品までの流れ
-        </p>
+    <section className="flex w-full flex-col items-center bg-[#F9F9F9] px-6 py-24 md:px-12">
+      <div className="mb-16 text-center">
+        <FadeIn>
+          <h2 className="mb-4 font-serif text-3xl font-bold text-[#1A1A1B] md:text-4xl">
+            Flow
+          </h2>
+          <p className="text-sm text-gray-600 md:text-base">
+            無料相談からご納品までの流れ
+          </p>
+        </FadeIn>
       </div>
 
-      <div className="w-full max-w-2xl relative">
-        {/* 左側の縦線 (タイムラインの軸) */}
-        <div className="absolute top-0 left-6 md:left-8 bottom-0 w-px bg-gray-300"></div>
+      <div className="relative w-full max-w-2xl">
+        <FadeIn delay={0.2}>
+          {/* 左側の縦線 (タイムラインの軸) */}
+          <div className="absolute top-0 bottom-0 left-6 w-px bg-gray-300 md:left-8"></div>
 
-        <div className="flex flex-col gap-12">
-          {flowSteps.map((step, index) => (
-            <div
-              key={step.id}
-              className="relative flex items-start gap-6 md:gap-8"
-            >
-              {/* ステップの丸いバッジ */}
-              <div className="shrink-0 relative z-10 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border-2 border-[#B89B72] flex items-center justify-center shadow-sm">
-                <span className="font-serif font-bold text-[#B89B72] text-lg md:text-xl">
-                  {step.id}
-                </span>
-              </div>
+          <div className="flex flex-col gap-12">
+            {flowSteps.map((step, index) => (
+              <div
+                key={step.id}
+                className="relative flex items-start gap-6 md:gap-8"
+              >
+                {/* ステップの丸いバッジ */}
+                <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#B89B72] bg-white shadow-sm md:h-16 md:w-16">
+                  <span className="font-serif text-lg font-bold text-[#B89B72] md:text-xl">
+                    {step.id}
+                  </span>
+                </div>
 
-              {/* テキストコンテンツ */}
-              <div className="pt-2 md:pt-4">
-                <h3 className="font-serif text-lg md:text-xl font-bold text-[#1A1A1B] mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-                  {step.description}
-                </p>
+                {/* テキストコンテンツ */}
+                <div className="pt-2 md:pt-4">
+                  <h3 className="mb-2 font-serif text-lg font-bold text-[#1A1A1B] md:text-xl">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-gray-700 md:text-base">
+                    {step.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
