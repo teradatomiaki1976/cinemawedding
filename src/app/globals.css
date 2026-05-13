@@ -5,11 +5,25 @@
   ここに書くだけで、自動的に bg-cinema-accent や text-cinema-black が使えるようになります！
 */
 @theme {
-  --color-cinema-black: #1a1a1b;
-  --color-cinema-gray: #f9f9f9;
-  --color-cinema-accent: #b89b72;
+  --color-black: #1a1a1b;
+  --color-gray: #f9f9f9;
+  --color-accent: #b89b72;
   --color-line: #06c755;
 
   --font-sans: var(--font-sans), sans-serif;
   --font-serif: var(--font-serif), serif;
+}
+@theme {
+  --animate-fade-in-up: fadeInUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
